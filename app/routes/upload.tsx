@@ -1,9 +1,13 @@
 import { useState, type FormEvent } from "react";
+import { useNavigate } from "react-router";
 import FileUploader from "~/components/FileUploader";
 import NavBar from "~/components/NavBar";
+import { usePuterStore } from "~/lib/puter";
 
 const upload = () => {
 
+    const {auth , isLoading , fs , ai , kv} = usePuterStore();
+    const navigate = useNavigate();
     const [isProcessing , setIsProcessing] = useState(false);
     const [statusText , setStatusText] = useState('');
 
@@ -13,20 +17,43 @@ const upload = () => {
         setFile(file);
     };
 
+    const handleAnalyse = async ({
+        companyName,
+        jobTitle,
+        jobDiscription,
+        file,
+    }: {
+        companyName: string;
+        jobTitle: string;
+        jobDiscription: string;
+        file: File;
+    }) => {
+        setIsProcessing(true);
+        setStatusText('Uploading the File ..');
+        const uploadFile = await fs.upload([file]);
+
+        if(!uploadFile) return setStatusText('Error Uploading : Went Something Wrong');
+
+      
+    };
+
     const handleSubmit = (e : FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const form = e.currentTarget.closest('form');
         if(!form) return;
         const formData = new FormData(form);
 
-        const companyName = formData.get('company-name');
-        const jobTitle = formData.get('job-title');
-         const discription = formData.get('job-discription');
+        const companyName = formData.get('company-name') as string;
+        const jobTitle = formData.get('job-title') as string;
+         const discription = formData.get('job-discription') as string;
 
          console.log({
             companyName , jobTitle , discription , file
          })
 
+         if(!file) return;
+
+         handleAnalyse({companyName , jobTitle , jobDiscription: discription , file});
     }
 
   return (
