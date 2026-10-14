@@ -1,87 +1,70 @@
-# Welcome to React Router!
+# Resumind - AI Resume Analyzer
 
-A modern, production-ready template for building full-stack React applications using React Router.
+Resumind helps job seekers understand how well their resume fits a role. Upload a PDF resume, add the target company and job details, and get AI-generated feedback, including an ATS score and practical suggestions for improvement.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+## Live app
+
+[Open Resumind](https://ai-resume-reviewe.netlify.app/)
 
 ## Features
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+- Sign in with [Puter](https://puter.com/).
+- Upload a PDF resume and provide the company, job title, and job description.
+- Convert the uploaded PDF into an image preview with [PDF.js](https://mozilla.github.io/pdf.js/).
+- Analyze the resume against the target role using Puter's AI service.
+- Review an overall score and feedback for ATS compatibility, tone and style, content, structure, and skills.
+- See saved resume submissions on the home page and reopen their reviews.
+- Store resume files and analysis data using Puter's file system and key-value storage.
 
-## Getting Started
+## Tech stack
 
-### Installation
+- **Language:** [TypeScript](https://www.typescriptlang.org/) and [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- **UI:** [React](https://react.dev/) and [React Router](https://reactrouter.com/)
+- **Build and development:** [Vite](https://vite.dev/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **AI, authentication, and data services:** [Puter.js](https://docs.puter.com/)
+- **PDF processing:** [PDF.js](https://mozilla.github.io/pdf.js/)
+- **State management:** [Zustand](https://zustand.docs.pmnd.rs/)
 
-Install the dependencies:
+### API and data fetching
+
+The app uses the [Puter.js SDK](https://docs.puter.com/) to interact with Puter's APIs in the browser. It uses Puter for user authentication, AI resume analysis, file uploads and reads, and key-value storage for saved resume details and feedback. The resume analysis is prompted with the job title and description so the feedback can be tailored to the role.
+
+## Run locally
+
+### Requirements
+
+- [Node.js](https://nodejs.org/) and npm
+- A Puter account to use sign-in, file storage, and AI analysis
+
+### Setup
+
+Clone the repository, install its dependencies, and start the development server:
 
 ```bash
+git clone https://github.com/SachinUthpala/ai-resume-analyzer.git
+cd ai-resume-analyzer
 npm install
-```
-
-### Development
-
-Start the development server with HMR:
-
-```bash
 npm run dev
 ```
 
-Your application will be available at `http://localhost:5173`.
+Open the local URL printed in the terminal (typically `http://localhost:5173`).
 
-## Building for Production
+## Available scripts
 
-Create a production build:
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start the local development server. |
+| `npm run build` | Create the production build. |
+| `npm run start` | Serve the production build. |
+| `npm run typecheck` | Generate React Router types and run the TypeScript compiler. |
+
+## Production
+
+Build the app with:
 
 ```bash
 npm run build
 ```
 
-## Deployment
-
-### Docker Deployment
-
-To build and run using Docker:
-
-```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
-```
-
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
-
----
-
-Built with ❤️ using React Router.
+The project is configured for client-side rendering with React Router. The repository also includes a `Dockerfile` for container-based deployment.
