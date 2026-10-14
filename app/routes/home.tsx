@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
+import Footer from "~/components/Footer";
 import NavBar from "~/components/NavBar";
 import ResumeCard from "~/components/ResumeCard";
 import { usePuterStore } from "~/lib/puter";
@@ -40,7 +41,7 @@ export default function Home() {
     loadResumes()
   }, []);
 
-  return <main className="bg-[url('/images/bg-main.svg')] bg-cover">
+  return <> <main className="bg-[url('/images/bg-main.svg')] bg-cover">
     <NavBar />
 
     <section className="main-section">
@@ -74,5 +75,8 @@ export default function Home() {
           </div>
       )}
     </section>
+    
   </main>
+  <Footer />
+  </>
 }
